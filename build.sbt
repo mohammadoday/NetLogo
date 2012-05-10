@@ -22,21 +22,22 @@ javaSource in Test <<= baseDirectory(_ / "src" / "test")
 
 resolvers += "java.net" at "http://download.java.net/maven/2"
 
-libraryDependencies ++= Seq("asm" % "asm-all" % "3.3.1",
-                            "org.picocontainer" % "picocontainer" % "2.13.6",
-                            "log4j" % "log4j" % "1.2.16",
-                            "javax.media" % "jmf" % "2.1.1e",
-                            "org.pegdown" % "pegdown" % "1.1.0",
-                            "org.parboiled" % "parboiled-java" % "1.0.2",
-                            "steveroy" % "mrjadapter" % "1.2" from "http://ccl.northwestern.edu/devel/mrjadapter-1.2.jar",
-                            "org.jhotdraw" % "jhotdraw" % "6.0b1" from "http://ccl.northwestern.edu/devel/jhotdraw-6.0b1.jar",
-                            "ch.randelshofer" % "quaqua" % "7.3.4" from "http://ccl.northwestern.edu/devel/quaqua-7.3.4.jar",
-                            "ch.randelshofer" % "swing-layout" % "7.3.4" from "http://ccl.northwestern.edu/devel/swing-layout-7.3.4.jar",
-                            "org.jogl" % "jogl" % "1.1.1" from "http://ccl.northwestern.edu/devel/jogl-1.1.1.jar",
-                            "org.gluegen-rt" % "gluegen-rt" % "1.1.1" from "http://ccl.northwestern.edu/devel/gluegen-rt-1.1.1.jar",
-                            "org.jmock" % "jmock" % "2.5.1" % "test",
-                            "org.jmock" % "jmock-legacy" % "2.5.1" % "test",
-                            "org.jmock" % "jmock-junit4" % "2.5.1" % "test",
-                            "org.scalacheck" % "scalacheck_2.9.1" % "1.9" % "test",
-                            "org.scalatest" %% "scalatest" % "1.8.RC1" % "test")
-
+libraryDependencies ++= Seq(
+  "asm" % "asm-all" % "3.3.1",
+  "org.picocontainer" % "picocontainer" % "2.13.6",
+  "log4j" % "log4j" % "1.2.16",
+  "javax.media" % "jmf" % "2.1.1e",
+  "org.pegdown" % "pegdown" % "1.1.0",
+  "org.parboiled" % "parboiled-java" % "1.0.2",
+  "steveroy" % "mrjadapter" % "1.2" from "http://ccl.northwestern.edu/devel/mrjadapter-1.2.jar",
+  "org.jhotdraw" % "jhotdraw" % "6.0b1" from "http://ccl.northwestern.edu/devel/jhotdraw-6.0b1.jar",
+  "ch.randelshofer" % "quaqua" % "7.3.4" from "http://ccl.northwestern.edu/devel/quaqua-7.3.4.jar",
+  "ch.randelshofer" % "swing-layout" % "7.3.4" from "http://ccl.northwestern.edu/devel/swing-layout-7.3.4.jar",
+  "org.jogl" % "jogl" % "1.1.1" from "http://ccl.northwestern.edu/devel/jogl-1.1.1.jar",
+  "org.gluegen-rt" % "gluegen-rt" % "1.1.1" from "http://ccl.northwestern.edu/devel/gluegen-rt-1.1.1.jar",
+  "org.jmock" % "jmock" % "2.5.1" % "test",
+  "org.jmock" % "jmock-legacy" % "2.5.1" % "test",
+  "org.jmock" % "jmock-junit4" % "2.5.1" % "test",
+  "org.scalacheck" % "scalacheck_2.9.1" % "1.9" % "test",
+  "org.scalatest" %% "scalatest" % "1.8.RC1" % "test"
+)
