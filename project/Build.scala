@@ -7,6 +7,18 @@ object NetLogoBuild extends Build {
       id = "NetLogo",
       base = file("."),
       settings = Defaults.defaultSettings ++ Seq(
+        unmanagedResourceDirectories in Compile <+=
+          baseDirectory { _ / "resources" },
         sourceGenerators in Compile <+= Autogen.sourceGeneratorTask
-      ))
+        mainClass in (Compile, packageBin) :=
+          Some("org.nlogo.app.App"),
+        packageOptions in packageBin <+= dependencyClasspath in Runtime map {
+          classpath =>
+            Package.ManifestAttributes((
+              "Class-Path", classpath.files
+                .map(f => "lib/" + f.getName)
+                .filter(_.endsWith(".jar"))
+                .mkString(" ")))},
+      )
+    )
 }
