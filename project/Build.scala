@@ -9,7 +9,7 @@ object NetLogoBuild extends Build {
       settings = Defaults.defaultSettings ++ Seq(
         unmanagedResourceDirectories in Compile <+=
           baseDirectory { _ / "resources" },
-        sourceGenerators in Compile <+= Autogen.sourceGeneratorTask
+        sourceGenerators in Compile <+= Autogen.sourceGeneratorTask,
         mainClass in (Compile, packageBin) :=
           Some("org.nlogo.app.App"),
         packageOptions in packageBin <+= dependencyClasspath in Runtime map {
@@ -18,7 +18,7 @@ object NetLogoBuild extends Build {
               "Class-Path", classpath.files
                 .map(f => "lib/" + f.getName)
                 .filter(_.endsWith(".jar"))
-                .mkString(" ")))},
+                .mkString(" ")))}
       )
     )
 }
