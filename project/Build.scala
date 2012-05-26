@@ -12,7 +12,7 @@ object NetLogoBuild extends Build {
         sourceGenerators in Compile <+= Autogen.sourceGeneratorTask,
         mainClass in (Compile, packageBin) :=
           Some("org.nlogo.app.App"),
-        packageOptions in packageBin <+= dependencyClasspath in Runtime map {
+        packageOptions <+= dependencyClasspath in Runtime map {
           classpath =>
             Package.ManifestAttributes((
               "Class-Path", classpath.files
