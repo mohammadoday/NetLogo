@@ -17,7 +17,6 @@ def skip(path:String):Boolean =
   path.startsWith(".#") ||
   path.containsSlice("/.idea/") ||
   path.containsSlice("/project/build/") ||
-  path.containsSlice("/project/boot/") ||
   path.containsSlice("/target/")
 
 val executableExtensions =
