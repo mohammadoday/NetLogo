@@ -23,6 +23,7 @@ object I18n {
     log("native2ascii: " + name)
     val in = base / "dist" / "i18n" / (name + ".txt")
     val result = dir / (name + ".properties")
+    IO.createDirectory(dir)
     (new sun.tools.native2ascii.Main).convert(
       Array("-encoding", "UTF-8", in.getPath, result.getPath))
     result
