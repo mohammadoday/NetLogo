@@ -15,7 +15,8 @@ mkdir -p tmp/nightly
 # here we're using pipes so "-e" isn't enough to stop when something fails.
 # maybe there's an easier way, than I've done it below, I don't know. 
 # I suck at shell scripting - ST 2/15/11
-bin/xsbt test 2>&1 | tee tmp/nightly/0-test.txt
+git submodule update --init
+bin/xsbt extensions test 2>&1 | tee tmp/nightly/0-test.txt
 if [ ${PIPESTATUS[0]} -ne 0 ] ; then echo "*** FAILED: test"; exit 1; fi
 echo "*** done: test"
 
