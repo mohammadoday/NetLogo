@@ -10,6 +10,7 @@ object NetLogoBuild extends Build {
         unmanagedResourceDirectories in Compile <+=
           baseDirectory { _ / "resources" },
         sourceGenerators in Compile <+= Autogen.sourceGeneratorTask,
+        resourceGenerators in Compile <+= I18n.resourceGeneratorTask,
         mainClass in (Compile, packageBin) :=
           Some("org.nlogo.app.App"),
         packageOptions <+= dependencyClasspath in Runtime map {
