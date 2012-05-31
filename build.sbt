@@ -20,7 +20,7 @@ javaSource in Compile <<= baseDirectory(_ / "src" / "main")
 
 javaSource in Test <<= baseDirectory(_ / "src" / "test")
 
-resolvers += "java.net" at "http://download.java.net/maven/2"
+resolvers += JavaNet2Repository // for jmf
 
 libraryDependencies ++= Seq(
   "asm" % "asm-all" % "3.3.1",
