@@ -20,7 +20,7 @@ javaSource in Compile <<= baseDirectory(_ / "src" / "main")
 
 javaSource in Test <<= baseDirectory(_ / "src" / "test")
 
-resolvers += JavaNet2Repository // for jmf
+moduleConfigurations += ModuleConfiguration("javax.media", JavaNet2Repository)
 
 libraryDependencies ++= Seq(
   "asm" % "asm-all" % "3.3.1",
