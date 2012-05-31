@@ -11,6 +11,10 @@ object NetLogoBuild extends Build {
                 Packaging.settings ++
                 moreSettings: _*)
 
+  // surely there's some better way to do these - ST 5/30/12
+  lazy val threed = TaskKey[Unit]("threed", "enable NetLogo 3D")
+  lazy val nogen = TaskKey[Unit]("nogen", "disable bytecode generator")
+
   lazy val moreSettings = Seq(
     unmanagedResourceDirectories in Compile <+=
       baseDirectory { _ / "resources" },
@@ -18,7 +22,9 @@ object NetLogoBuild extends Build {
     resourceGenerators in Compile <+= I18n.resourceGeneratorTask,
     mainClass in (Compile, packageBin) :=
       Some("org.nlogo.app.App"),
-    Extensions.extensionsTask
+    Extensions.extensionsTask,
+    threed := { System.setProperty("org.nlogo.is3d", "true") },
+    nogen  := { System.setProperty("org.nlogo.noGenerator", "true") }
   )
 
 }
