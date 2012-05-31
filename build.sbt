@@ -38,6 +38,6 @@ libraryDependencies ++= Seq(
   "org.jmock" % "jmock" % "2.5.1" % "test",
   "org.jmock" % "jmock-legacy" % "2.5.1" % "test",
   "org.jmock" % "jmock-junit4" % "2.5.1" % "test",
-  "org.scalacheck" % "scalacheck_2.9.1" % "1.9" % "test",
-  "org.scalatest" %% "scalatest" % "1.8.RC1" % "test"
+  "org.scalacheck" %% "scalacheck" % "1.9" % "test",
+  "org.scalatest" %% "scalatest" % "1.8" % "test"
 )
