@@ -41,12 +41,12 @@ object Testing {
   // a way that might make this easier.  see e.g.
   // github.com/harrah/xsbt/commit/fe753768d93ebeaf59c9435059b583a7b2e744d3 - ST 5/31/12
   private def oneTest(key: TaskKey[_], name: String) =
-   (streams in key, loadedTestFrameworks in Test, parallelExecution in key, testOptions in key, testLoader in Test, definedTests in Test) flatMap {
-     case (s, frameworks, par, opts, loader, discovered) =>
-       val filter = Tests.Filter(Defaults.selectedFilter(Seq(name)))
-       Tests(frameworks, loader, discovered, filter +: opts, par, "not found", s.log) map { results =>
-         Tests.showResults(s.log, results)
-       }
-   }
+    (streams in key, loadedTestFrameworks in Test, parallelExecution in key, testOptions in key, testLoader in Test, definedTests in Test) flatMap {
+      case (s, frameworks, par, opts, loader, discovered) =>
+        val filter = Tests.Filter(Defaults.selectedFilter(Seq(name)))
+        Tests(frameworks, loader, discovered, filter +: opts, par, "not found", s.log) map { results =>
+          Tests.showResults(s.log, results)
+        }
+    }
 
 }
