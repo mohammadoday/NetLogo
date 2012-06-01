@@ -13,6 +13,7 @@ object Testing {
   lazy val tc = InputKey[Unit]("tc", "run TestCommands", test)
   lazy val te = InputKey[Unit]("te", "run TestExtensions", test)
   lazy val tm = InputKey[Unit]("tm", "run TestModels", test)
+  lazy val testChecksums = InputKey[Unit]("test-checksums", "run TestChecksums", test)
 
   val settings =
     inConfig(FastTest)(Defaults.testTasks) ++
@@ -28,9 +29,10 @@ object Testing {
       tr <<= Testing.oneTest(tr, "org.nlogo.headless.TestReporters"),
       tc <<= Testing.oneTest(tc, "org.nlogo.headless.TestCommands"),
       tm <<= Testing.oneTest(tm, "org.nlogo.headless.TestModels"),
-      te <<= Testing.oneTest(te, "org.nlogo.headless.TestExtensions")
+      te <<= Testing.oneTest(te, "org.nlogo.headless.TestExtensions"),
+      testChecksums <<= Testing.oneTest(testChecksums, "org.nlogo.headless.TestChecksums")
     ) ++
-    Seq(tr, tc, tm, te).flatMap(Defaults.testTaskOptions)
+    Seq(tr, tc, tm, te, testChecksums).flatMap(Defaults.testTaskOptions)
 
   private def fastFilter(path: Classpath, name: String): Boolean = !slowFilter(path, name)
   private def mediumFilter(path: Classpath, name: String): Boolean =
