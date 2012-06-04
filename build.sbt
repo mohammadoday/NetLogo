@@ -20,6 +20,8 @@ javaSource in Compile <<= baseDirectory(_ / "src" / "main")
 
 javaSource in Test <<= baseDirectory(_ / "src" / "test")
 
+unmanagedSourceDirectories in Test <+= baseDirectory(_ / "src" / "tools")
+
 moduleConfigurations += ModuleConfiguration("javax.media", JavaNet2Repository)
 
 libraryDependencies ++= Seq(

@@ -24,6 +24,7 @@ object NetLogoBuild extends Build {
     mainClass in (Compile, run) := Some("org.nlogo.app.App"),
     mainClass in (Compile, packageBin) := Some("org.nlogo.app.App"),
     Extensions.extensionsTask,
+    InfoTab.infoTabTask,
     threed := { System.setProperty("org.nlogo.is3d", "true") },
     nogen  := { System.setProperty("org.nlogo.noGenerator", "true") }
   )
