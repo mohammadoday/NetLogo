@@ -26,6 +26,3 @@ object Extensions {
   }
 
 }
-
-// cd $(dir $@); JAVA_HOME=$(JAVA_HOME) SCALA_JAR=../../$(SCALA_JAR_BASE) make -s $(notdir $@)
-

@@ -1,4 +1,3 @@
-.NOTPARALLEL:
 # comment out if you want, when debugging this
 .SILENT:
 # sadly this only works on plain files not directories.
@@ -6,8 +5,8 @@
 
 ### top level targets; "netlogo" is default target.  the "dict.txt" is
 ### because we also need to generate the "split dictionary.html" files
-.PHONY: netlogo
-netlogo: resources/system/dict.txt extensions models/index.txt bin/Scripting.class docs/infotab.html | tmp
+.PHONY: netlogo sbt
+netlogo: bin/Scripting.class resources/system/dict.txt | tmp
 
 ### misc variables
 ifneq (,$(findstring CYGWIN,$(shell uname -s)))
@@ -44,8 +43,10 @@ CLASSPATH = $(LIBS)$(CLASSES)$(COLON)resources$(COLON)$(SCALA_JAR)
 tmp:
 	@echo "@@@ making tmp"
 	mkdir -p tmp
-$(SCALA_JAR):
-	bin/sbt update
+
+### sbt
+sbt $(SCALA_JAR) $(JARS) docs/infotab.html:
+	bin/sbt extensions infotab
 
 ### targets for running
 goshell:
@@ -66,46 +67,6 @@ resources/system/dict.txt: bin/dictsplit.py docs/dictionary.html
 	@echo "@@@ building dict.txt"
 	@rm -rf docs/dict
 	python bin/dictsplit.py
-
-docs/infotab.html: models/Code\ Examples/Info\ Tab\ Example.nlogo
-	bin/sbt infotab
-
-models/index.txt:
-	@echo "@@@ building models/index.txt (NOT IMPLEMENTED YET)"
-#	bin/sbt model-index
-
-### JAR building
-
-JARS = NetLogo.jar NetLogoLite.jar HubNet.jar
-$(JARS): | $(SCALA_JAR)
-	bin/sbt package
-
-### extensions
-
-EXTENSIONS=\
-	extensions/array/array.jar \
-	extensions/bitmap/bitmap.jar \
-	extensions/gis/gis.jar \
-	extensions/gogo/gogo.jar \
-	extensions/matrix/matrix.jar \
-	extensions/network/network.jar \
-	extensions/profiler/profiler.jar \
-	extensions/sample/sample.jar \
-	extensions/sample-scala/sample-scala.jar \
-	extensions/sound/sound.jar \
-	extensions/table/table.jar \
-	extensions/qtj/qtj.jar
-EXTENSIONS_PACK200 =\
-	$(addsuffix .pack.gz,$(EXTENSIONS))
-
-.PHONY: extensions clean-extensions
-extensions: $(EXTENSIONS) $(EXTENSIONS_PACK200)
-clean-extensions:
-	rm -f $(EXTENSIONS) $(EXTENSIONS_PACK200)
-
-# most of them use NetLogoLite.jar, but the profiler extension uses NetLogo.jar - ST 5/11/11
-$(EXTENSIONS) $(EXTENSIONS_PACK200): $(JARS)
-	bin/sbt extensions
 
 ### Scaladoc
 
