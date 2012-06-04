@@ -9,11 +9,10 @@ if [ "$1" != --noclean ]; then
   git submodule foreach git clean -fdX
 fi
 
+make
+
 rm -rf tmp/nightly
 mkdir -p tmp/nightly
-
-git submodule update --init
-bin/sbt extensions
 
 # here we're using pipes so "-e" isn't enough to stop when something fails.
 # maybe there's an easier way, than I've done it below, I don't know. 

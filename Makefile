@@ -1,3 +1,4 @@
+.NOTPARALLEL:
 # comment out if you want, when debugging this
 .SILENT:
 # sadly this only works on plain files not directories.
@@ -43,10 +44,8 @@ CLASSPATH = $(LIBS)$(CLASSES)$(COLON)resources$(COLON)$(SCALA_JAR)
 tmp:
 	@echo "@@@ making tmp"
 	mkdir -p tmp
-bin/sbt-launch.jar:
-	curl -S 'http://simple-build-tool.googlecode.com/files/sbt-launch-0.7.7.jar' -o bin/sbt-launch.jar
-$(SCALA_JAR): | bin/sbt-launch.jar
-	bin/sbt error update
+$(SCALA_JAR):
+	bin/sbt update
 
 ### targets for running
 goshell:
@@ -69,18 +68,17 @@ resources/system/dict.txt: bin/dictsplit.py docs/dictionary.html
 	python bin/dictsplit.py
 
 docs/infotab.html: models/Code\ Examples/Info\ Tab\ Example.nlogo
-	bin/sbt warn gen-info-tab-docs
+	bin/sbt infotab
 
 models/index.txt:
-	@echo "@@@ building models/index.txt"
-	bin/sbt warn model-index
+	@echo "@@@ building models/index.txt (NOT IMPLEMENTED YET)"
+#	bin/sbt model-index
 
 ### JAR building
 
 JARS = NetLogo.jar NetLogoLite.jar HubNet.jar
-.NOTPARALLEL: $(JARS)
 $(JARS): | $(SCALA_JAR)
-	bin/sbt warn alljars
+	bin/sbt package
 
 ### extensions
 
@@ -106,10 +104,8 @@ clean-extensions:
 	rm -f $(EXTENSIONS) $(EXTENSIONS_PACK200)
 
 # most of them use NetLogoLite.jar, but the profiler extension uses NetLogo.jar - ST 5/11/11
-$(EXTENSIONS) $(EXTENSIONS_PACK200): | NetLogo.jar NetLogoLite.jar
-	git submodule update --init
-	@echo "@@@ building" $(notdir $@)
-	cd $(dir $@); JAVA_HOME=$(JAVA_HOME) SCALA_JAR=../../$(SCALA_JAR_BASE) make -s $(notdir $@)
+$(EXTENSIONS) $(EXTENSIONS_PACK200): $(JARS)
+	bin/sbt extensions
 
 ### Scaladoc
 
