@@ -17,7 +17,8 @@ object Packaging {
       IO.download(new URL("http://ccl.northwestern.edu/netlogo/5.0.1/NetLogoLite.jar"),
                   file(".") / "NetLogoLite.jar")
       jar
-    }
+    },
+    artifactName := { (_, _, _) => "NetLogo.jar" }
   )
 
 }
