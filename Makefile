@@ -45,8 +45,8 @@ tmp:
 	mkdir -p tmp
 
 ### sbt
-sbt $(SCALA_JAR) $(JARS) docs/infotab.html:
-	bin/sbt extensions infotab
+sbt $(SCALA_JAR) $(JARS) models/index.txt docs/infotab.html:
+	bin/sbt extensions model-index infotab
 
 ### targets for running
 goshell:

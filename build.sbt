@@ -36,6 +36,8 @@ Extensions.extensionsTask
 
 InfoTab.infoTabTask
 
+ModelIndex.modelIndexTask
+
 threed := { System.setProperty("org.nlogo.is3d", "true") }
 
 nogen  := { System.setProperty("org.nlogo.noGenerator", "true") }
