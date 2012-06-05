@@ -37,4 +37,8 @@ bin/sbt threed slow:test 2>&1 | tee tmp/nightly/5-threed-slow-test.txt
 if [ ${PIPESTATUS[0]} -ne 0 ] ; then echo "*** FAILED: threed slow:test"; exit 1; fi
 echo "*** done: threed slow:test"
 
+bin/sbt depend 2>&1 | tee tmp/nightly/6-depend.txt
+if [ ${PIPESTATUS[0]} -ne 0 ] ; then echo "*** FAILED: depend"; exit 1; fi
+echo "*** done: depend"
+
 echo "****** all done!"

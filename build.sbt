@@ -38,6 +38,8 @@ InfoTab.infoTabTask
 
 ModelIndex.modelIndexTask
 
+Depend.dependTask
+
 threed := { System.setProperty("org.nlogo.is3d", "true") }
 
 nogen  := { System.setProperty("org.nlogo.noGenerator", "true") }
